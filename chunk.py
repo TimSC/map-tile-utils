@@ -39,12 +39,12 @@ if __name__=="__main__":
 	im = Image.open("spiralgraphics/High Altitude.jpg")
 	patchSize = 120, 120
 	numPatches = 10
+	marginSize = 20
 	out = GetPatches(im, patchSize, numPatches)
 	for i, patch in enumerate(out):
 		patch.save("spiralgraphics-mountain-solid{0}.png".format(i))
 	
 	#Generate transparent margins
-	marginSize = 20
 	for i, patch in enumerate(out):
 		pm = GenMargin(patch, marginSize)
 		pm.save("spiralgraphics-mountain-margin{0}.png".format(i))
@@ -57,7 +57,6 @@ if __name__=="__main__":
 		patch.save("spiralgraphics-ice-solid{0}.png".format(i))
 	
 	#Generate transparent margins
-	marginSize = 20
 	for i, patch in enumerate(out):
 		pm = GenMargin(patch, marginSize)
 		pm.save("spiralgraphics-ice-margin{0}.png".format(i))
@@ -70,7 +69,6 @@ if __name__=="__main__":
 		patch.save("spiralgraphics-sea-solid{0}.png".format(i))
 	
 	#Generate transparent margins
-	marginSize = 20
 	for i, patch in enumerate(out):
 		pm = GenMargin(patch, marginSize)
 		pm.save("spiralgraphics-sea-margin{0}.png".format(i))
@@ -84,7 +82,6 @@ if __name__=="__main__":
 		patch.save("spiralgraphics-sea-solid{0}.png".format(i))
 	
 	#Generate transparent margins
-	marginSize = 20
 	for i, patch in enumerate(out):
 		pm = GenMargin(patch, marginSize)
 		pm.save("spiralgraphics-sea-margin{0}.png".format(i))
@@ -98,7 +95,6 @@ if __name__=="__main__":
 		patch.save("spiralgraphics-city-solid{0}.png".format(i))
 	
 	#Generate transparent margins
-	marginSize = 20
 	for i, patch in enumerate(out):
 		pm = GenMargin(patch, marginSize)
 		pm.save("spiralgraphics-city-margin{0}.png".format(i))
@@ -112,8 +108,20 @@ if __name__=="__main__":
 		patch.save("spiralgraphics-plain-solid{0}.png".format(i))
 	
 	#Generate transparent margins
-	marginSize = 20
 	for i, patch in enumerate(out):
 		pm = GenMargin(patch, marginSize)
 		pm.save("spiralgraphics-plain-margin{0}.png".format(i))
+
+	print "Desert"
+	im = Image.open("spiralgraphics/Sahara.jpg")
+	im = im.crop((240, 0, im.size[0], im.size[1]))
+	numPatches = 10
+	out = GetPatches(im, patchSize, numPatches)
+	for i, patch in enumerate(out):
+		patch.save("spiralgraphics-desert-solid{0}.png".format(i))
+	
+	#Generate transparent margins
+	for i, patch in enumerate(out):
+		pm = GenMargin(patch, marginSize)
+		pm.save("spiralgraphics-desert-margin{0}.png".format(i))
 
