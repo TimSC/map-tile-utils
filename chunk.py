@@ -79,12 +79,12 @@ if __name__=="__main__":
 	numPatches = 10
 	out = GetPatches(im, patchSize, numPatches)
 	for i, patch in enumerate(out):
-		patch.save("spiralgraphics-sea-solid{0}.png".format(i))
+		patch.save("spiralgraphics-jungle-solid{0}.png".format(i))
 	
 	#Generate transparent margins
 	for i, patch in enumerate(out):
 		pm = GenMargin(patch, marginSize)
-		pm.save("spiralgraphics-sea-margin{0}.png".format(i))
+		pm.save("spiralgraphics-jungle-margin{0}.png".format(i))
 
 	print "City"
 	im = Image.open("spiralgraphics/Urban Jungle.jpg")
