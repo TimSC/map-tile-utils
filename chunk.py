@@ -1,12 +1,22 @@
-from PIL import Image
+from PIL import Image, ImageEnhance
 import random
 
 def GetPatches(im, patchSize, numPatches):
 	out = []
+	cursorx = 0
+	cursory = 0
 	for i in range(numPatches):
-		cx, cy = random.randint(0, im.size[0]-patchSize[0]), random.randint(0, im.size[1]-patchSize[1])
+		cx, cy = cursorx, cursory
 		patch = im.crop((cx, cy, cx+patchSize[0], cy+patchSize[1]))
 		out.append(patch.convert("RGBA"))
+		
+		cursorx += patchSize[0]
+		if cursorx + patchSize[0] >= im.size[0]:
+			cursorx = 0
+			cursory += patchSize[1]
+			if cursory + patchSize[1] >= im.size[1]:
+				cursorx = 0
+				cursory = 0
 	return out
 
 def GenMargin(patch, marginSize):
@@ -100,7 +110,9 @@ if __name__=="__main__":
 		pm.save("spiralgraphics-city-margin{0}.png".format(i))
 
 	print "Plain"
-	im = Image.open("spiralgraphics/Before the War.jpg")
+	im = Image.open("spiralgraphics/Meadow Streams.jpg")
+	enhancer = ImageEnhance.Brightness(im)
+	im = enhancer.enhance(1.5)
 	im = im.crop((240, 0, im.size[0], im.size[1]))
 	numPatches = 10
 	out = GetPatches(im, patchSize, numPatches)
